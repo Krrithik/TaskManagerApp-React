@@ -2,6 +2,33 @@
     box-sizing: border-box;
 }
 
+body{
+    margin: 0;
+    padding: 0;
+}
+
 h1{
     color: red;
 }
+
+.app-container{
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18%; /* Adjust as needed */
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #f0f0f0; 
+    padding: 20px;
+  }
+  
+  .content {
+    margin-left: 18%; /* Should match the sidebar width */
+    flex: 1;
+    padding: 20px;
+  }
