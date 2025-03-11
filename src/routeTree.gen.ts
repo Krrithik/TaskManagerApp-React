@@ -13,6 +13,9 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as TeamTasksImport } from './routes/teamTasks'
+import { Route as PersonalTasksImport } from './routes/personalTasks'
+import { Route as AssignTasksImport } from './routes/assignTasks'
 import { Route as IndexImport } from './routes/index'
 
 // Create Virtual Routes
@@ -26,6 +29,24 @@ const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
+
+const TeamTasksRoute = TeamTasksImport.update({
+  id: '/teamTasks',
+  path: '/teamTasks',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PersonalTasksRoute = PersonalTasksImport.update({
+  id: '/personalTasks',
+  path: '/personalTasks',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AssignTasksRoute = AssignTasksImport.update({
+  id: '/assignTasks',
+  path: '/assignTasks',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -44,6 +65,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/assignTasks': {
+      id: '/assignTasks'
+      path: '/assignTasks'
+      fullPath: '/assignTasks'
+      preLoaderRoute: typeof AssignTasksImport
+      parentRoute: typeof rootRoute
+    }
+    '/personalTasks': {
+      id: '/personalTasks'
+      path: '/personalTasks'
+      fullPath: '/personalTasks'
+      preLoaderRoute: typeof PersonalTasksImport
+      parentRoute: typeof rootRoute
+    }
+    '/teamTasks': {
+      id: '/teamTasks'
+      path: '/teamTasks'
+      fullPath: '/teamTasks'
+      preLoaderRoute: typeof TeamTasksImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -58,36 +100,57 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assignTasks': typeof AssignTasksRoute
+  '/personalTasks': typeof PersonalTasksRoute
+  '/teamTasks': typeof TeamTasksRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assignTasks': typeof AssignTasksRoute
+  '/personalTasks': typeof PersonalTasksRoute
+  '/teamTasks': typeof TeamTasksRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/assignTasks': typeof AssignTasksRoute
+  '/personalTasks': typeof PersonalTasksRoute
+  '/teamTasks': typeof TeamTasksRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/assignTasks' | '/personalTasks' | '/teamTasks' | '/about'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/assignTasks' | '/personalTasks' | '/teamTasks' | '/about'
+  id:
+    | '__root__'
+    | '/'
+    | '/assignTasks'
+    | '/personalTasks'
+    | '/teamTasks'
+    | '/about'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssignTasksRoute: typeof AssignTasksRoute
+  PersonalTasksRoute: typeof PersonalTasksRoute
+  TeamTasksRoute: typeof TeamTasksRoute
   AboutLazyRoute: typeof AboutLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssignTasksRoute: AssignTasksRoute,
+  PersonalTasksRoute: PersonalTasksRoute,
+  TeamTasksRoute: TeamTasksRoute,
   AboutLazyRoute: AboutLazyRoute,
 }
 
@@ -102,11 +165,23 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
+        "/assignTasks",
+        "/personalTasks",
+        "/teamTasks",
         "/about"
       ]
     },
     "/": {
       "filePath": "index.jsx"
+    },
+    "/assignTasks": {
+      "filePath": "assignTasks.jsx"
+    },
+    "/personalTasks": {
+      "filePath": "personalTasks.jsx"
+    },
+    "/teamTasks": {
+      "filePath": "teamTasks.jsx"
     },
     "/about": {
       "filePath": "about.lazy.jsx"
