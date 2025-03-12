@@ -6,16 +6,38 @@ export const Route = createFileRoute('/assignTasks')({
 })
 
 function AssignTasks() {
-   const [newUsername, setUsername] = useState('');
+   const [newUsername, setNewUsername] = useState('');
 
-   const handleChange = (event) => {
-    setUsername(event.target.value);
+   const [newTaskData, setNewTaskData] = useState({
+    task: '',
+    dueDate: '',
+    priority: '',
+   });
+
+   const handleUsernameChange = (event) => {
+    setNewUsername(event.target.value);
    };
 
    const handleUsernameSubmit = (event) => {
     event.preventDefault();
+    {/* Currently going to the log, will need to change this to be saved into some form of storage*/}
     console.log('Submitted username: ', newUsername);
-    setUsername('');
+    setNewUsername('');
+   };
+
+   const handleTaskChange = (event) => {
+    const {name, value} = event.target;
+    setNewTaskData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+   };
+
+   const handleTaskSubmit = (event) => {
+    event.preventDefault();
+    {/* Currently going to the log, will need to change this to be saved into some form of storage*/}
+    console.log('Task data submitted: ', newTaskData);
+
    }
 
   return (
@@ -26,11 +48,29 @@ function AssignTasks() {
       <form onSubmit={handleUsernameSubmit}>
         <label>
           <h2>Add new user:</h2>
-          <input type="text" value={newUsername} onChange={handleChange}/>
+          <input type="text" value={newUsername} onChange={handleUsernameChange}/>
         </label>
         <button type="submit">Submit</button>
       </form>
       
+      <div>
+        <h2>Add new task</h2>
+      <form onSubmit={handleTaskSubmit}>
+        <label>
+          <p>Task Details:</p>
+          <input type="text" name="task" value={newTaskData.task} onChange={handleTaskChange}/>
+        </label>
+        <label>
+          <p>Task Due Date:</p>
+          <input type="text" name="dueDate" value={newTaskData.dueDate} onChange={handleTaskChange}/>
+        </label>
+        <label>
+          <p>Task Priority Level:</p>
+          <input type="text" name="priority" value={newTaskData.priority} onChange={handleTaskChange}/>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+      </div>
     </>
   );
 }
