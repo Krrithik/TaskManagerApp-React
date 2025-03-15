@@ -47,6 +47,7 @@ function AssignTasks() {
     event.preventDefault();
     {/* Currently going to the log, will need to change this to be saved into some form of storage*/}
     console.log('Task data submitted: ', newTaskData);
+   }
   
 
    useEffect(() => {
@@ -56,8 +57,8 @@ function AssignTasks() {
    useEffect(() => {
     localStorage.setItem('newTaskData', newTaskData);
    }, [newTaskData]);
-
-   }
+  
+   
 
   return (
     <>
