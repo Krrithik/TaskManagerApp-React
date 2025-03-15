@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getItem } from '../utils/StorageFunctions';
 import { getDefaultResultOrder } from 'dns';
 import { setItem } from '../utils/StorageFunctions';
@@ -9,7 +9,10 @@ export const Route = createFileRoute('/assignTasks')({
 })
 
 function AssignTasks() {
-   const [newUsername, setNewUsername] = useState('');
+   const [newUsername, setNewUsername] = useState(() => {
+    const names = localStorage.getItem('newUsername');
+    return names ? names : 0;
+   });
 
    const [newTaskData, setNewTaskData] = useState({
     task: '',
@@ -17,9 +20,7 @@ function AssignTasks() {
     priority: '',
    });
 
-   //useEffect(() => {
-    //setItem('Username', newUsername);
-   //}, [newUsername]);
+   
 
    const handleUsernameChange = (event) => {
     setNewUsername(event.target.value);
@@ -29,10 +30,8 @@ function AssignTasks() {
     event.preventDefault();
     {/* Currently going to the log, will need to change this to be saved into some form of storage*/}
     console.log('Submitted username: ', newUsername);
-  
-    const item = getItem(newUsername);
     setNewUsername('');
-    return item || 0;
+    
 
    };
 
@@ -47,10 +46,16 @@ function AssignTasks() {
    const handleTaskSubmit = (event) => {
     event.preventDefault();
     {/* Currently going to the log, will need to change this to be saved into some form of storage*/}
-    
     console.log('Task data submitted: ', newTaskData);
-    const item = getItem(newUsername);
-    return item || 0;
+  
+
+   useEffect(() => {
+    localStorage.setItem('newUsername', newUsername);
+   }, [newUsername]);
+
+   useEffect(() => {
+    localStorage.setItem('newTaskData', newTaskData);
+   }, [newTaskData]);
 
    }
 
