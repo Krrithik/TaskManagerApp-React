@@ -8,7 +8,6 @@ export const Route = createFileRoute("/assignTasks")({
 function assignTasks() {
   return (
     <>
-      <h1>Assign Tasks PAGE</h1>
       <AssignTasks />
     </>
   );
