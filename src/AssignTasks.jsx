@@ -4,7 +4,8 @@ import { setItem, getItem } from "./utils/StorageFunctions";
 
 export default function AssignTasks() {
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState( () =>  { return getItem("tasks") || [];}
+);
 
   const [newUsername, setNewUsername] = useState(() => {
     const names = getItem("newUsername");
@@ -25,10 +26,6 @@ export default function AssignTasks() {
     setItem("tasks", tasks);
   }, [tasks]);
 
-  useEffect(() => {
-    const tasks = getItem("tasks");
-    setTasks(tasks);
-  }, [])
 
   const handleUsernameChange = (event) => {
     setNewUsername(event.target.value);
