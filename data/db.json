@@ -1,0 +1,29 @@
+{ "users": 
+  [
+    {
+      "username": "mwehrmeyer",
+      "role": 0,
+      "tasks": [
+        {
+          "description": "Work on assign page",
+          "status": 1,
+          "priority": 10,
+          "due": "3/16/2025"
+        },
+        {
+          "description": "Work on persistant storage",
+          "status": 0,
+          "priority": 9,
+          "due": "3/16/2025"
+        }
+      ]
+    },
+    {
+	  	"username": "krrxthxk",
+      "role": 1,
+      "tasks": [
+      
+      ]
+    }
+  ]
+}
