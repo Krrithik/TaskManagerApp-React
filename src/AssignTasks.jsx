@@ -4,8 +4,9 @@ import { setItem, getItem } from "./utils/StorageFunctions";
 
 export default function AssignTasks() {
 
-    const [tasks, setTasks] = useState( () =>  { return getItem("tasks") || [];}
-);
+  const [tasks, setTasks] = useState( 
+    () =>  { return getItem("tasks") || [];}
+  );
 
   const [newUsername, setNewUsername] = useState(() => {
     const names = getItem("newUsername");
