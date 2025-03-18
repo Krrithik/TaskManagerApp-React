@@ -46,7 +46,7 @@ export default function AddUser() {
 					<input 
 						type="text"
 						value={newUsername.userName}
-						onChange={(e) => setUName(e.target.value)} 
+						onChange={(e) => setNewUsername({...newUsername, userName: e.target.value})} 
 					/>
 				</label>
 				<button onClick={handleUsernameSubmit}>Submit</button>
