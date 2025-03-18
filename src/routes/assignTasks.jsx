@@ -14,10 +14,7 @@ function assignTasks() {
     <>
       <h1>Assign tasks</h1>
       <p>Only admins will be able to assign tasks to users</p>
-      <AddUser />
       <hr />
-      <h2>Manage User</h2>
-      <SelectUser />
       <AssignTask />
     </>
   );
