@@ -12,8 +12,8 @@ export default function AssignTask() {
       taskName: "",
       dueDate: "",
       priority: "medium",
-      status: "assigned"
-    }
+      status: "assigned",
+    },
   });
 
   useEffect(() => {
@@ -21,59 +21,58 @@ export default function AssignTask() {
     setItem("users", users);
   }, [tasks, users]);
 
-  function handleUserSubmit(e){
+  function handleUserSubmit(e) {
     e.preventDefault();
     if (!newTaskData.name) return;
-    
-    setUsers(prevUsers => [
+
+    setUsers((prevUsers) => [
       ...prevUsers,
       {
         name: newTaskData.name,
         role: newTaskData.role,
-        tasks: []
-      }
+        tasks: [],
+      },
     ]);
-    
-    setNewTaskData(prev => ({
+
+    setNewTaskData((prev) => ({
       ...prev,
       name: "",
-      role: ""
+      role: "",
     }));
-  };
+  }
 
-
-  function handleTaskSubmit(e){
+  function handleTaskSubmit(e) {
     e.preventDefault();
     if (!newTaskData.task.taskName || !newTaskData.name) return;
 
     const newTask = {
       ...newTaskData.task,
-      assignedTo: newTaskData.name
+      assignedTo: newTaskData.name,
     };
 
-    setTasks(prevTasks => [...prevTasks, newTask]);
-    
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+
     // Update user's task list
-    setUsers(prevUsers => 
-      prevUsers.map(user => 
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
         user.name === newTaskData.name
           ? { ...user, tasks: [...user.tasks, newTask] }
           : user
       )
     );
 
-    setNewTaskData(prev => ({
+    setNewTaskData((prev) => ({
       ...prev,
       task: {
         taskName: "",
         dueDate: "",
         priority: "medium",
-        status: "assigned"
-      }
+        status: "assigned",
+      },
     }));
-  };
+  }
 
-	/* function createNewTask(t){
+  /* function createNewTask(t){
     let newTask = {
         details: t.task,
         due: t.dueDate,
@@ -82,7 +81,7 @@ export default function AssignTask() {
     return newTask;
   } */
 
-	return (
+  return (
     <div className="assign-task-container">
       {/* Add User Form */}
       <div className="user-form-section">
@@ -93,10 +92,12 @@ export default function AssignTask() {
             <input
               type="text"
               value={newTaskData.name}
-              onChange={(e) => setNewTaskData(prev => ({
-                ...prev,
-                name: e.target.value
-              }))}
+              onChange={(e) =>
+                setNewTaskData((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
               required
             />
           </div>
@@ -105,10 +106,12 @@ export default function AssignTask() {
             <input
               type="text"
               value={newTaskData.role}
-              onChange={(e) => setNewTaskData(prev => ({
-                ...prev,
-                role: e.target.value
-              }))}
+              onChange={(e) =>
+                setNewTaskData((prev) => ({
+                  ...prev,
+                  role: e.target.value,
+                }))
+              }
               required
             />
           </div>
@@ -124,14 +127,16 @@ export default function AssignTask() {
             <label>Assign to:</label>
             <select
               value={newTaskData.name}
-              onChange={(e) => setNewTaskData(prev => ({
-                ...prev,
-                name: e.target.value
-              }))}
+              onChange={(e) =>
+                setNewTaskData((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
               required
             >
               <option value="">Select User</option>
-              {users.map(user => (
+              {users.map((user) => (
                 <option key={user.name} value={user.name}>
                   {user.name} ({user.role})
                 </option>
@@ -144,10 +149,12 @@ export default function AssignTask() {
             <input
               type="text"
               value={newTaskData.task.taskName}
-              onChange={(e) => setNewTaskData(prev => ({
-                ...prev,
-                task: { ...prev.task, taskName: e.target.value }
-              }))}
+              onChange={(e) =>
+                setNewTaskData((prev) => ({
+                  ...prev,
+                  task: { ...prev.task, taskName: e.target.value },
+                }))
+              }
               required
             />
           </div>
@@ -157,10 +164,12 @@ export default function AssignTask() {
             <input
               type="date"
               value={newTaskData.task.dueDate}
-              onChange={(e) => setNewTaskData(prev => ({
-                ...prev,
-                task: { ...prev.task, dueDate: e.target.value }
-              }))}
+              onChange={(e) =>
+                setNewTaskData((prev) => ({
+                  ...prev,
+                  task: { ...prev.task, dueDate: e.target.value },
+                }))
+              }
               required
             />
           </div>
@@ -169,10 +178,12 @@ export default function AssignTask() {
             <label>Priority:</label>
             <select
               value={newTaskData.task.priority}
-              onChange={(e) => setNewTaskData(prev => ({
-                ...prev,
-                task: { ...prev.task, priority: e.target.value }
-              }))}
+              onChange={(e) =>
+                setNewTaskData((prev) => ({
+                  ...prev,
+                  task: { ...prev.task, priority: e.target.value },
+                }))
+              }
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
