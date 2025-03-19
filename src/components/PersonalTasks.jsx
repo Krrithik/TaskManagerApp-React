@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getItem } from "../utils/StorageFunctions";
+import UserDropdown from "./UserDropdown"
 
 export default function PersonalTasks() {
   // Retrieve users from local storage
@@ -13,29 +14,13 @@ export default function PersonalTasks() {
     users.find((user) => user.name === selectedUser)?.tasks || [];
   /* instead of this
      const findSelectedUserTasks = users.find((user) => user.name === selectedUser)
-      const tasks = findSelectedUserTask && findSelectedUserTasks ? findSelectedUserTasks.tasks : [];
+      const tasks = findSelectedUserTask && findSelectedUserTasks.tasks ? findSelectedUserTasks.tasks : [];
     */
 
-      
   return (
     <>
       {/* Dropdown to select a user */}
-      <div className="dropdown-container">
-        <label htmlFor="userDropdown">Select User:</label>
-        <select
-          id="userDropdown"
-          value={selectedUser}
-          onChange={(e) => setSelectedUser(e.target.value)}
-          className="p-2 border rounded"
-        >
-          <option value="">-- Select a User --</option>
-          {users.map((user) => (
-            <option key={user.name} value={user.name}>
-              {user.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <UserDropdown userOptions={users} selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
 
       {/* Display tasks of the selected user */}
       {selectedUser ? (
