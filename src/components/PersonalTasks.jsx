@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { getItem } from "../utils/StorageFunctions";
-import UserDropdown from "./UserDropdown"
+import { getItem, setItem } from "../utils/StorageFunctions";
+import UserDropdown from "./UserDropdown";
 
 export default function PersonalTasks() {
   // Retrieve users from local storage
-  const users = getItem("users") || [];
+  const [users, setUsers] = useState(() => getItem("users") || []);
 
   // State to store the selected user's name
   const [selectedUser, setSelectedUser] = useState("");
@@ -17,10 +17,31 @@ export default function PersonalTasks() {
       const tasks = findSelectedUserTask && findSelectedUserTasks.tasks ? findSelectedUserTasks.tasks : [];
     */
 
+  function onDeleteHandler(deleteTaskName) {
+    const updatedUser = users.map((user) =>
+      user.name === selectedUser
+        ? {
+            ...user,
+            tasks: user.tasks.filter(
+              (task) => task.taskName != deleteTaskName
+            ),
+          }
+        : user
+    );
+
+    setUsers(updatedUser);
+    setItem("users", updatedUser);
+   
+  }
+
   return (
     <>
       {/* Dropdown to select a user */}
-      <UserDropdown userOptions={users} selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+      <UserDropdown
+        userOptions={users}
+        selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser}
+      />
 
       {/* Display tasks of the selected user */}
       {selectedUser ? (
@@ -33,6 +54,9 @@ export default function PersonalTasks() {
                   <strong>Task:</strong> {task.taskName} |
                   <strong> Due Date:</strong> {task.dueDate} |
                   <strong> Priority:</strong> {task.priority}
+                  <button onClick={() => onDeleteHandler(task.taskName)}>
+                    delete
+                  </button>
                 </li>
               ))}
             </ul>

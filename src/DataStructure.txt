@@ -1,0 +1,23 @@
+for saving the task ->
+
+{
+    name: "",
+    role: "",
+    task: {
+      taskName: "",
+      dueDate: "",
+      priority: "medium",
+      status: "assigned",
+    },
+}
+
+for and a user and saving the state ->
+
+[
+      ...prevUsers,
+      {
+        name: newTaskData.name,
+        role: newTaskData.role,
+        tasks: [],
+      },
+    ]
