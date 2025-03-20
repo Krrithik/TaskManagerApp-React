@@ -8,7 +8,7 @@ export default function AddUser({ onUserAdded }) {
 		e.preventDefault();
 		if (!name || !role) return;
 
-		onUserAdded({ newUsername: name, newRole: role });
+		onUserAdded({ name: name, role: role });
 		setNewRole('');
 		setNewUsername('');
 	};
