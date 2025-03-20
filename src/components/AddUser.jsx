@@ -1,28 +1,48 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-export default function AddUser() {
-  const [newUsername, setNewUsername] = useState('');
+export default function AddUser({ onUserAdded }) {
+	const [name, setNewUsername] = useState('');
+	const [role, setNewRole] = useState('');
 
-  function handleUsernameSubmit(e) {
-    e.preventDefault();
-		{/*Currently going to the log, will need to change this to be saved into some form of storage*/}
-    console.log('Submitted username: ', newUsername);
-    setNewUsername('');
-  };
+	function handleUserSubmit(e) {
+		e.preventDefault();
+		if (!name || !role) return;
 
-  return (
+		onUserAdded({ newUsername: name, newRole: role });
+		setNewRole('');
+		setNewUsername('');
+	};
+
+	return (
 		<>
-			<form onSubmit={handleUsernameSubmit}>
-				<label>
-					<h2> Add new user: </h2>
-					<input 
-						type="text"
-						value={newUsername}
-						onChange={(e) => setNewUsername(e.target.value)} 
-					/>
-				</label>
-				<button onClick={handleUsernameSubmit}>Submit</button>
-			</form>
+			<div className="user-form-section">
+				<h3>Add New User</h3>
+				<form onSubmit={handleUserSubmit}>
+					<div className="form-group">
+						<label>Name:</label>
+						<input
+							type="text"
+							value={name}
+							onChange={(e) =>
+								setNewUsername(e.target.value)
+							}
+							required
+						/>
+					</div>
+					<div className="form-group">
+						<label>Role:</label>
+						<input
+							type="text"
+							value={role}
+							onChange={(e) =>
+								setNewRole(e.target.value)
+							}
+							required
+						/>
+					</div>
+					<button type="submit">Add User</button>
+				</form>
+			</div>
 		</>
-  );
+	);
 }

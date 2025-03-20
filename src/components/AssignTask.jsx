@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { setItem, getItem } from "../utils/StorageFunctions";
+import AddUser from "./AddUser";
 
 export default function AssignTask() {
   const [users, setUsers] = useState(() => getItem("users") || []);
@@ -21,7 +22,8 @@ export default function AssignTask() {
     setItem("users", users);
   }, [tasks, users]);
 
-  function handleUserSubmit(e) {
+  
+   /* function handleUserSubmit(e) {
     e.preventDefault();
     if (!newTaskData.name) return;
 
@@ -39,7 +41,7 @@ export default function AssignTask() {
       name: "",
       role: "",
     }));
-  }
+  }  */
 
   function handleTaskSubmit(e) {
     e.preventDefault();
@@ -81,43 +83,19 @@ export default function AssignTask() {
     return newTask;
   } */
 
+
+  function handleUserAdded(e){
+    setUsers((prevUsers) => [...prevUsers,{...e, tasks: []}])
+
+  }
+
+
+
+
   return (
     <div className="assign-task-container">
       {/* Add User Form */}
-      <div className="user-form-section">
-        <h3>Add New User</h3>
-        <form onSubmit={handleUserSubmit}>
-          <div className="form-group">
-            <label>Name:</label>
-            <input
-              type="text"
-              value={newTaskData.name}
-              onChange={(e) =>
-                setNewTaskData((prev) => ({
-                  ...prev,
-                  name: e.target.value,
-                }))
-              }
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Role:</label>
-            <input
-              type="text"
-              value={newTaskData.role}
-              onChange={(e) =>
-                setNewTaskData((prev) => ({
-                  ...prev,
-                  role: e.target.value,
-                }))
-              }
-              required
-            />
-          </div>
-          <button type="submit">Add User</button>
-        </form>
-      </div>
+      <AddUser onUserAdded = {handleUserAdded}/> 
 
       {/* Assign Task Form */}
       <div className="task-form-section">
