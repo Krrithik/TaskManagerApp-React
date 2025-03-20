@@ -4,37 +4,64 @@ import UserDropdown from "./UserDropdown";
 
 export default function TeamTasks() {
   const users = getItem("users") || [];
+  const otherUsers = getItem("users") || [];
 
-  const [selectedUser, setSelectedUser] = useState("");
+  const [selectedCurrentUser, setSelectedCurrentUser] = useState("");
+  const [pickUserView, setPickUserView] = useState("");
 
+  {/* Picks the user who is using the app ... will need to be pushed out of here eventually */}
   const teamMemberTasks = users.filter(
-    (teamMemberName) => teamMemberName.name != selectedUser
+    (teamMemberName) => teamMemberName.name != selectedCurrentUser
   );
+
+  {/* Based on the who is the current user */}
+  const teamMembersChoice = teamMemberTasks.filter(
+    (userTasks) => userTasks.name == pickUserView
+  );
+
   console.log(teamMemberTasks);
 
   return (
     <>
+      <h3>Select a user to be</h3>
       <UserDropdown
         userOptions={users}
-        selectedUser={selectedUser}
-        setSelectedUser={setSelectedUser}
+        selectedUser={selectedCurrentUser}
+        setSelectedUser={setSelectedCurrentUser}
       />
-
+      <hr />
+      <h3>Select a user to view their tasks</h3>
+      <UserDropdown
+        userOptions={teamMemberTasks}
+        selectedUser={pickUserView}
+        setSelectedUser={setPickUserView}
+      />
+      <hr />
       {/* Display tasks of the selected user */}
-      {selectedUser ? (
+      {pickUserView ? (
         <>
-          {teamMemberTasks.map((teamMembers, index) => (
+          {teamMembersChoice.map((teamMembers, index) => (
             <div key={index}>
               <h2>{teamMembers.name} tasks</h2>
-              <ul>
-                {teamMembers.tasks.map((task, taskIndex) => (
-                  <li key={taskIndex}>
-                    <strong>Task:</strong> {task.taskName} |{" "}
-                    <strong>Due Date:</strong> {task.dueDate} |{" "}
-                    <strong>Priority:</strong> {task.priority}
-                  </li>
+              <table style={{width:'100%', tableLayout: 'fixed', border: '1px solid black'}}>
+                <thead>
+                  <th>Task</th>
+                  <th>Due Date</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                </thead>
+                <tbody>
+                {teamMembers.tasks.map((task, taskIndex) => (  
+                    <tr key={taskIndex}>
+                      <td>{task.taskName}</td>
+                      <td>{task.dueDate}</td>
+                      <td>{task.priority}</td>
+                      <td>{task.status}</td>
+                    </tr>
+                  
                 ))}
-              </ul>
+                </tbody>
+              </table>
             </div>
           ))}
         </>
