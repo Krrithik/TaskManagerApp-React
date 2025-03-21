@@ -40,6 +40,19 @@ a:hover{
 h3{
     color: rgb(103,31,31);
 }
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    
+}
+
+td{
+    text-wrap: normal;
+    word-wrap: break-word;
+}
+
+
 .app-container{
     display: flex;
     width: 100%;

@@ -31,14 +31,18 @@ export default function AddUser({ onUserAdded }) {
 					</div>
 					<div className="form-group">
 						<label>Role:</label>
-						<input
-							type="text"
-							value={role}
+						<select required
+							value = {role}
 							onChange={(e) =>
-								setNewRole(e.target.value)
+                				setNewRole(e.target.value)
 							}
-							required
-						/>
+						>
+						
+						<option value="" selected disabled hidden>Select Role</option>
+						<option value="user" >User</option>
+              			<option value="admin">Admin</option>
+              			
+						</select>
 					</div>
 					<button type="submit">Add User</button>
 				</form>
