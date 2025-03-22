@@ -22,17 +22,20 @@ export default function PersonalTasks() {
       user.name === selectedUser
         ? {
             ...user,
-            tasks: user.tasks.filter(
-              (task) => task.taskName != deleteTaskName
-            ),
+            tasks: user.tasks.filter((task) => task.taskName != deleteTaskName),
           }
         : user
     );
 
     setUsers(updatedUser);
     setItem("users", updatedUser);
-   
   }
+
+  
+
+
+ 
+
 
   return (
     <>
@@ -63,6 +66,20 @@ export default function PersonalTasks() {
           ) : (
             <p>No tasks found for this user.</p>
           )}
+
+          <div className="assigned-container">
+           
+          </div>
+
+          <div className="inprogress-container">
+            
+          </div>
+
+          <div className="done-container">
+
+          </div>
+
+
         </div>
       ) : (
         <p>Please select a user to view their tasks.</p>
