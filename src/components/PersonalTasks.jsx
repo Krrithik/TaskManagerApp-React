@@ -31,9 +31,88 @@ export default function PersonalTasks() {
     setItem("users", updatedUser);
   }
 
-  
+  function updateUserTasks(updatedTasks) {
+    const updatedUsers = users.map((user) =>
+      user.name === selectedUser ? { ...user, tasks: updatedTasks } : user
+    );
+    setUsers(updatedUsers);
+    setItem("users", updatedUsers);
+  }
 
+  function handleMoveRight(taskName, currentStatus) {
+    let newStatus = "";
+    if (currentStatus === "assigned"){
+       newStatus = "inprogress";
+    }else if (currentStatus === "inprogress") {
+      newStatus = "done";
+    }
 
+    if (newStatus) {
+      const updatedTasks = selectedUserTasks.map((task) =>
+        task.taskName === taskName ? { ...task, status: newStatus } : task
+      );
+      updateUserTasks(updatedTasks);
+    }
+  }
+
+  function handleMoveLeft(taskName, currentStatus) {
+    let newStatus = "";
+    if (currentStatus === "done") {
+      newStatus = "inprogress";
+    }else if (currentStatus === "inprogress"){
+       newStatus = "assigned";
+    }
+
+    if (newStatus) {
+      const updatedTasks = selectedUserTasks.map((task) =>
+        task.taskName === taskName ? { ...task, status: newStatus } : task
+      );
+      updateUserTasks(updatedTasks);
+    }
+  }
+
+  function renderColumn(status, showLeftButton, showRightButton){
+    const filteredTasks = selectedUserTasks.filter(
+      (task) => task.status === status
+    )
+
+    return (
+      <>
+      <div className={`${status}-container`}>
+        <h3>{status.charAt(0).toUpperCase() + status.slice(1)}</h3>
+        {filteredTasks.length > 0 ? (
+          filteredTasks.map((task, index) => (
+            <div className="task-card" key={index}>
+              <div>Task: {task.taskName}</div>
+              <div>Due Date: {task.dueDate}</div>
+              <div>Priority: {task.priority}</div>
+              <button onClick={() => onDeleteHandler(task.taskName)}>
+                Delete
+              </button>
+              {showLeftButton && (
+                <button
+                  onClick={() => handleMoveLeft(task.taskName, task.status)}
+                >
+                  Move Left
+                </button>
+              )}
+              {showRightButton && (
+                <button
+                  onClick={() => handleMoveRight(task.taskName, task.status)}
+                >
+                  Move Right
+                </button>
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No tasks in this column.</p>
+        )}
+      </div>
+    </>
+    );
+
+  }
  
 
 
@@ -51,33 +130,18 @@ export default function PersonalTasks() {
         <div>
           <h2>Tasks for {selectedUser}:</h2>
           {selectedUserTasks.length > 0 ? (
-            <ul>
-              {selectedUserTasks.map((task, index) => (
-                <li key={index}>
-                  <strong>Task:</strong> {task.taskName} |
-                  <strong> Due Date:</strong> {task.dueDate} |
-                  <strong> Priority:</strong> {task.priority}
-                  <button onClick={() => onDeleteHandler(task.taskName)}>
-                    delete
-                  </button>
-                </li>
-              ))}
-            </ul>
+             <>
+            <div className="columns-container">
+            {renderColumn("assigned", false, true)}
+            {renderColumn("inprogress", true, true)}
+            {renderColumn("done", true, false)}
+          </div>
+           </>
           ) : (
             <p>No tasks found for this user.</p>
           )}
 
-          <div className="assigned-container">
-           
-          </div>
-
-          <div className="inprogress-container">
-            
-          </div>
-
-          <div className="done-container">
-
-          </div>
+          
 
 
         </div>
