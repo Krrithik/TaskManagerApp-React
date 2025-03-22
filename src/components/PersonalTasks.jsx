@@ -79,7 +79,7 @@ export default function PersonalTasks() {
     return (
       <>
       <div className={`${status}-container`}>
-        <h3>{status.charAt(0).toUpperCase() + status.slice(1)}</h3>
+        <h3 className="status-title">{status.charAt(0).toUpperCase() + status.slice(1)}</h3>
         {filteredTasks.length > 0 ? (
           filteredTasks.map((task, index) => (
             <div className="task-card" key={index}>

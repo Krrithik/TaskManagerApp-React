@@ -1,76 +1,100 @@
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
-body{
-    background-color: rgb(100, 157, 157);
-    margin: 0;
-    padding: 0;
-    color: white;
-    font-size: x-large;
+body {
+  background-color: rgb(100, 157, 157);
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-size: x-large;
 }
 
-input{
-    background-color: rgb(198, 198, 202);
-    font-size: medium;
+input {
+  background-color: rgb(198, 198, 202);
+  font-size: medium;
 }
 
-select{
-    background-color: rgb(198, 198, 202);
-    font-size: medium;
+select {
+  background-color: rgb(198, 198, 202);
+  font-size: medium;
 }
 
-button{
-    background-color: rgb(198, 198, 202);
-    font-size: medium;
+button {
+  background-color: rgb(198, 198, 202);
+  font-size: medium;
 }
 
-h1{
-    color: rgb(103, 31, 31);
+h1 {
+  color: rgb(103, 31, 31);
 }
 
-a{
-    color: black;
+a {
+  color: black;
 }
 
-a:hover{
-    color: white;
+a:hover {
+  color: white;
 }
 
-h3{
-    color: rgb(103,31,31);
+h3 {
+  color: rgb(103, 31, 31);
 }
 
-table, th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
-td{
-    text-wrap: normal;
-    word-wrap: break-word;
+td {
+  text-wrap: normal;
+  word-wrap: break-word;
 }
 
-
-.app-container{
-    display: flex;
-    width: 100%;
+.app-container {
+  display: flex;
+  width: 100%;
 }
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 18%; /* Adjust as needed */
-    height: 100vh;
-    overflow-y: auto;
-    background-color: #b0d2f5; 
-    padding: 20px;
-  }
-  
-  .content {
-    margin-left: 18%; /* Should match the sidebar width */
-    flex: 1;
-    padding: 20px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18%; /* Adjust as needed */
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #b0d2f5;
+  padding: 20px;
+}
+
+.content {
+  margin-left: 18%; /* Should match the sidebar width */
+  flex: 1;
+  padding: 20px;
+}
+
+/* Personal Tasks page */
+.columns-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.assigned-container,
+.inprogress-container,
+.done-container {
+  border: solid 1px black;
+  width: 30%;
+}
+
+.status-title{
+    text-align: center;
+}
+
+.task-card{
+    border: solid 1px black;
+    margin: 10px;
+    padding: 10px;
+    background-color:darkcyan;
+}
