@@ -86,9 +86,7 @@ export default function PersonalTasks() {
               <div>Task: {task.taskName}</div>
               <div>Due Date: {task.dueDate}</div>
               <div>Priority: {task.priority}</div>
-              <button onClick={() => onDeleteHandler(task.taskName)}>
-                Delete
-              </button>
+              
               {showLeftButton && (
                 <button
                   onClick={() => handleMoveLeft(task.taskName, task.status)}
@@ -96,6 +94,10 @@ export default function PersonalTasks() {
                   Move Left
                 </button>
               )}
+
+<button onClick={() => onDeleteHandler(task.taskName)}>
+                Delete
+              </button>
               {showRightButton && (
                 <button
                   onClick={() => handleMoveRight(task.taskName, task.status)}
