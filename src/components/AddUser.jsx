@@ -6,7 +6,17 @@ export default function AddUser({ onUserAdded }) {
 
 	function handleUserSubmit(e) {
 		e.preventDefault();
+
 		if (!name || !role) return;
+
+		let err1 = document.getElementById("err1");
+		if (name.includes(' ')) {
+			err1.setAttribute("style", "display:block;color:black");
+			return;
+		}
+		else {
+			err1.setAttribute("style", "display:none;color:black");
+		}
 
 		onUserAdded({ name: name, role: role });
 		setNewRole('');
@@ -28,6 +38,7 @@ export default function AddUser({ onUserAdded }) {
 							}
 							required
 						/>
+						<div id="err1" style={{display:'none' }}>UserName can not have spaces</div>
 					</div>
 					<div className="form-group">
 						<label>Role:</label>
