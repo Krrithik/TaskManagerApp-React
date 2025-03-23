@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import "./style.css"
 
 export default function SideBar() {
   return (
