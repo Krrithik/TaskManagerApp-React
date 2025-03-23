@@ -128,7 +128,7 @@ export default function PersonalTasks() {
       {/* Display tasks of the selected user */}
       {selectedUser ? (
         <div>
-          <h2>Tasks for {selectedUser}:</h2>
+          <h3>Tasks for {selectedUser}:</h3>
           {selectedUserTasks.length > 0 ? (
              <>
             <div className="columns-container">
