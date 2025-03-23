@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { getItem } from "../utils/StorageFunctions";
 
 export default function AddUser({ onUserAdded }) {
 	const [name, setNewUsername] = useState('');
 	const [role, setNewRole] = useState('');
+	const [users, setUsers] = useState(() => getItem("users") || []);
 
 	function handleUserSubmit(e) {
 		e.preventDefault();
@@ -10,12 +12,28 @@ export default function AddUser({ onUserAdded }) {
 		if (!name || !role) return;
 
 		let err1 = document.getElementById("err1");
+		let err2 = document.getElementById("err2");
 		if (name.includes(' ')) {
 			err1.setAttribute("style", "display:block;color:black");
 			return;
 		}
 		else {
 			err1.setAttribute("style", "display:none;color:black");
+		}
+
+		let confirmed = true;
+		users.forEach(user => {
+			if (user.name == name) {
+				confirmed = false;
+				return;
+			}
+		})
+		if (!confirmed){
+			err2.setAttribute("style", "display:block;color:black");
+			return;
+		}
+		else {
+			err2.setAttribute("style", "display:none;color:black");
 		}
 
 		onUserAdded({ name: name, role: role });
@@ -39,6 +57,7 @@ export default function AddUser({ onUserAdded }) {
 							required
 						/>
 						<div id="err1" style={{display:'none' }}>UserName can not have spaces</div>
+						<div id="err2" style={{display:'none' }}>UserName is taken</div>
 					</div>
 					<div className="form-group">
 						<label>Role:</label>
