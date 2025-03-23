@@ -47,11 +47,30 @@ export default function AssignTask() {
     e.preventDefault();
     if (!newTaskData.task.taskName || !newTaskData.name) return;
 
+    let err3 = document.getElementById("err3");
+    let verified = true;
+		tasks.forEach(task =>{
+      if (task.taskName == newTaskData.task.taskName) {
+        verified = false;
+        return;
+      }
+  
+    })
+    if (!verified){
+        err3.setAttribute("style", "display:block;color:black");
+        return;
+    }
+    else {
+        err3.setAttribute("style", "display:none;color:black");
+    }
+    
+
     const newTask = {
       ...newTaskData.task,
       assignedTo: newTaskData.name,
     };
 
+  
     setTasks((prevTasks) => [...prevTasks, newTask]);
 
     // Update user's task list
@@ -136,6 +155,7 @@ export default function AssignTask() {
               required
             />
           </div>
+          <div id="err3" style={{display:'none' }}>Task is already assigned to this user</div>
 
           <div className="form-group">
             <label>Due Date:</label>
