@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 function Index() {
   return (
     <>
-  <div>Hello home, ie index!</div>
+  <div></div>
   <App />
   </>
 )

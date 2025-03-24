@@ -5,6 +5,9 @@ import AddUser from "./AddUser";
 export default function AssignTask() {
   const [users, setUsers] = useState(() => getItem("users") || []);
   const [tasks, setTasks] = useState(() => getItem("tasks") || []);
+  
+
+  
 
   const [newTaskData, setNewTaskData] = useState({
     name: "",
@@ -22,26 +25,6 @@ export default function AssignTask() {
     setItem("users", users);
   }, [tasks, users]);
 
-  
-   /* function handleUserSubmit(e) {
-    e.preventDefault();
-    if (!newTaskData.name) return;
-
-    setUsers((prevUsers) => [
-      ...prevUsers,
-      {
-        name: newTaskData.name,
-        role: newTaskData.role,
-        tasks: [],
-      },
-    ]);
-
-    setNewTaskData((prev) => ({
-      ...prev,
-      name: "",
-      role: "",
-    }));
-  }  */
 
   function handleTaskSubmit(e) {
     e.preventDefault();
@@ -64,6 +47,7 @@ export default function AssignTask() {
         err3.setAttribute("style", "display:none;color:black");
     }
     
+
 
     const newTask = {
       ...newTaskData.task,
@@ -91,25 +75,14 @@ export default function AssignTask() {
         status: "assigned",
       },
     }));
+
+
   }
-
-  /* function createNewTask(t){
-    let newTask = {
-        details: t.task,
-        due: t.dueDate,
-        priority: t.priority,
-    }
-    return newTask;
-  } */
-
 
   function handleUserAdded(e){
     setUsers((prevUsers) => [...prevUsers,{...e, tasks: []}])
 
   }
-
-
-
 
   return (
     <div className="assign-task-container">
@@ -132,7 +105,7 @@ export default function AssignTask() {
               }
               required
             >
-              <option value="">Select User</option>
+              <option value="" selected disabled hidden>Select User</option>
               {users.map((user) => (
                 <option key={user.name} value={user.name}>
                   {user.name} ({user.role})
