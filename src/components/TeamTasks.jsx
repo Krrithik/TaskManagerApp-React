@@ -23,13 +23,16 @@ export default function TeamTasks() {
 
   return (
     <>
-      <h3>Select a user to be</h3>
-      <UserDropdown
-        userOptions={users}
-        selectedUser={selectedCurrentUser}
-        setSelectedUser={setSelectedCurrentUser}
-      />
-      <hr />
+      <div style={{float:'right'}}>
+        <h2 className="curr">Current user: {selectedCurrentUser}</h2>
+        <UserDropdown
+          userOptions={users}
+          selectedUser={selectedCurrentUser}
+          setSelectedUser={setSelectedCurrentUser}
+        />
+      </div>
+      <h1>Welcome to team tasks</h1>
+      <p>Here you will be able to see the tasks assigned to other team mates and users</p>
       <h3>Select a user to view their tasks</h3>
       <UserDropdown
         userOptions={teamMemberTasks}
@@ -42,15 +45,18 @@ export default function TeamTasks() {
         <>
           {teamMembersChoice.map((teamMembers, index) => (
             <div key={index}>
-              <h2>{teamMembers.name} tasks</h2>
-              <table style={{width:'100%', tableLayout: 'fixed', border: '1px solid black'}}>
+              <h3>{teamMembers.name} Tasks:</h3>
+              <div className="scrollable-table">
+              <table style={{width:'100%', tableLayout: 'fixed'}}>
                 <thead>
-                  <th>Task</th>
-                  <th>Due Date</th>
-                  <th>Priority</th>
-                  <th>Status</th>
+                  <tr className="teamHeader">
+                    <th>Task</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                  </tr>
                 </thead>
-                <tbody>
+                <tbody className="teamTBody">
                 {teamMembers.tasks.map((task, taskIndex) => (  
                     <tr key={taskIndex}>
                       <td>{task.taskName}</td>
@@ -62,6 +68,7 @@ export default function TeamTasks() {
                 ))}
                 </tbody>
               </table>
+              </div>
             </div>
           ))}
         </>

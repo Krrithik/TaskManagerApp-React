@@ -7,9 +7,10 @@ export const Route = createLazyFileRoute("/about")({
 function About() {
   return (
     <div className="about-page">
-      <h1>ABOUT PAGE!</h1>
+      <h1>ABOUT</h1>
+      <h3>Goal</h3>
       <p>
-        This is a lazy page router, just as an example for future reference.
+        Goal of this app is to be able manage tasks with groups of people.
       </p>
     </div>
   );

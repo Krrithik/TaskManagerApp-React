@@ -35,18 +35,34 @@ h3 {
   color: rgb(103, 31, 31);
 }
 
-table,
-th,
-td {
+.scrollable-table {
+  overflow-y: auto;
+  height: 500px;
+}
+
+th {
+  background-color:  rgb(58, 102, 102) ;
+  position: sticky;
+  top: 0;
+}
+
+table {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
+.teamTBody tr:nth-of-type(even){
+  background-color: rgb(71, 128, 128);
+}
+
 td {
+  padding: 6px 8px;
   text-wrap: normal;
   word-wrap: break-word;
 }
-
+.curr {
+  color: rgb(103, 31, 31)
+}
 .app-container {
   display: flex;
   width: 100%;
@@ -80,7 +96,7 @@ td {
     text-transform: uppercase;
     letter-spacing: 2px;
   }
-  
+
   h2 {
     font-weight: 600;
     font-size: 20px;
