@@ -41,7 +41,6 @@ h3 {
 }
 
 th {
-  background-color:  rgb(58, 102, 102) ;
   position: sticky;
   top: 0;
 }
@@ -51,9 +50,6 @@ table {
   border-collapse: collapse;
 }
 
-.teamTBody tr:nth-of-type(even){
-  background-color: rgb(71, 128, 128);
-}
 
 td {
   padding: 6px 8px;
