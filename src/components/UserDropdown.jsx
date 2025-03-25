@@ -2,13 +2,13 @@ export default function userDropdown({ userOptions, selectedUser, setSelectedUse
   return (
     <>
       <div className="dropdown-container">
-        <label htmlFor="userDropdown">Select User:</label>
+        <label htmlFor="userDropdown"> User: </label>
         <select
           id="userDropdown"
           value={selectedUser}
           onChange={(e) => setSelectedUser(e.target.value)}
         >
-          <option value="">-- Select a User --</option>
+          <option value="">-- Select a User: --</option>
           {userOptions.map((user) => (
             <option key={user.name} value={user.name}>
               {user.name}
