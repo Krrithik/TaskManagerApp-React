@@ -14,7 +14,9 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TeamTasksImport } from './routes/teamTasks'
+import { Route as SignupImport } from './routes/signup'
 import { Route as PersonalTasksImport } from './routes/personalTasks'
+import { Route as LoginImport } from './routes/login'
 import { Route as AssignTasksImport } from './routes/assignTasks'
 import { Route as IndexImport } from './routes/index'
 
@@ -36,9 +38,21 @@ const TeamTasksRoute = TeamTasksImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const SignupRoute = SignupImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const PersonalTasksRoute = PersonalTasksImport.update({
   id: '/personalTasks',
   path: '/personalTasks',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -72,11 +86,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssignTasksImport
       parentRoute: typeof rootRoute
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
     '/personalTasks': {
       id: '/personalTasks'
       path: '/personalTasks'
       fullPath: '/personalTasks'
       preLoaderRoute: typeof PersonalTasksImport
+      parentRoute: typeof rootRoute
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupImport
       parentRoute: typeof rootRoute
     }
     '/teamTasks': {
@@ -101,7 +129,9 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assignTasks': typeof AssignTasksRoute
+  '/login': typeof LoginRoute
   '/personalTasks': typeof PersonalTasksRoute
+  '/signup': typeof SignupRoute
   '/teamTasks': typeof TeamTasksRoute
   '/about': typeof AboutLazyRoute
 }
@@ -109,7 +139,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assignTasks': typeof AssignTasksRoute
+  '/login': typeof LoginRoute
   '/personalTasks': typeof PersonalTasksRoute
+  '/signup': typeof SignupRoute
   '/teamTasks': typeof TeamTasksRoute
   '/about': typeof AboutLazyRoute
 }
@@ -118,21 +150,39 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/assignTasks': typeof AssignTasksRoute
+  '/login': typeof LoginRoute
   '/personalTasks': typeof PersonalTasksRoute
+  '/signup': typeof SignupRoute
   '/teamTasks': typeof TeamTasksRoute
   '/about': typeof AboutLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assignTasks' | '/personalTasks' | '/teamTasks' | '/about'
+  fullPaths:
+    | '/'
+    | '/assignTasks'
+    | '/login'
+    | '/personalTasks'
+    | '/signup'
+    | '/teamTasks'
+    | '/about'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assignTasks' | '/personalTasks' | '/teamTasks' | '/about'
+  to:
+    | '/'
+    | '/assignTasks'
+    | '/login'
+    | '/personalTasks'
+    | '/signup'
+    | '/teamTasks'
+    | '/about'
   id:
     | '__root__'
     | '/'
     | '/assignTasks'
+    | '/login'
     | '/personalTasks'
+    | '/signup'
     | '/teamTasks'
     | '/about'
   fileRoutesById: FileRoutesById
@@ -141,7 +191,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssignTasksRoute: typeof AssignTasksRoute
+  LoginRoute: typeof LoginRoute
   PersonalTasksRoute: typeof PersonalTasksRoute
+  SignupRoute: typeof SignupRoute
   TeamTasksRoute: typeof TeamTasksRoute
   AboutLazyRoute: typeof AboutLazyRoute
 }
@@ -149,7 +201,9 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssignTasksRoute: AssignTasksRoute,
+  LoginRoute: LoginRoute,
   PersonalTasksRoute: PersonalTasksRoute,
+  SignupRoute: SignupRoute,
   TeamTasksRoute: TeamTasksRoute,
   AboutLazyRoute: AboutLazyRoute,
 }
@@ -166,7 +220,9 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/assignTasks",
+        "/login",
         "/personalTasks",
+        "/signup",
         "/teamTasks",
         "/about"
       ]
@@ -177,8 +233,14 @@ export const routeTree = rootRoute
     "/assignTasks": {
       "filePath": "assignTasks.jsx"
     },
+    "/login": {
+      "filePath": "login.jsx"
+    },
     "/personalTasks": {
       "filePath": "personalTasks.jsx"
+    },
+    "/signup": {
+      "filePath": "signup.jsx"
     },
     "/teamTasks": {
       "filePath": "teamTasks.jsx"
